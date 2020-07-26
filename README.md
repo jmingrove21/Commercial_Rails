@@ -1,23 +1,12 @@
-# README
+# Commercial Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+전자상거래를 Ruby on Rails 기반으로 제작한 프로젝트입니다.
 
-Things you may want to cover:
+### Installation
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
+> ```
+> bundle
+> yarn install
+> rails db:create (db 생성 안했을 시)
+> rails db:migrate
+> ```
