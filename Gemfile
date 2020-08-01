@@ -50,6 +50,8 @@ group :test do
   gem 'webdrivers'
 end
 
+
+gem 'carrierwave', '~> 2.0'
 # devise 연동
 gem 'devise'
 

@@ -36,6 +36,15 @@
     <%= f.text_field :zipcode, autofocus: true, autocomplete: "zipcode" %>
   </div>
 
+
+  <div class="field">
+    <%= f.label :image do %>
+      <%= f.file_field :image %>
+      <%= f.hidden_field :image_cache %>
+    <% end %>
+  </div>
+
+  
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
