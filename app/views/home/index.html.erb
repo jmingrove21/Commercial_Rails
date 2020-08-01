@@ -54,12 +54,26 @@
         </div>
 
         <div class="row">
-          <!-- 등록된 상품이 없는 경우 고려할 필요 있음. 반복문으로 진행/.row -->
+          <!-- 등록된 상품이 없는 경우 고려. 반복문으로 진행/.row -->
           <% if @items.present?%>
             <% @items.each do |item|%>
               <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card h-100">
-                  <a href="#"><img class="card-img-top" src="<%="/image/main.jpg"%>" alt=""></a>
+                  <div id="carouselExampleIndicators<%=item.id%>" class="carousel slide" data-touch="true">
+                    <ol class="carousel-indicators">
+                        <% item.images.count.times.each do |index| %>
+                            <li data-target="#carouselExampleIndicators<%=item.id%>" data-slide-to="<%= index %>" class="<%= 'active' if (index == 0) %>"></li>
+                        <% end %>
+                    </ol>
+                    <div class="carousel-inner">
+                        <% item.images.each_with_index do |image, index| %>
+                            <div class="carousel-item img-div <%= 'active' if (index == 0) %>">
+                                <img src="<%= image.image %>" class="d-block w-100 img-inner" alt="">
+                            </div>
+                        <% end %>
+                    </div>
+                  </div>
+
                   <div class="card-body">
                     <h4 class="card-title">
                       <a href="#"><%=item.title%></a>
@@ -95,6 +109,9 @@
     </div>
     <!-- /.container -->
   </footer>
+<!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
  
 </body>
