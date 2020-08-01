@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_01_123621) do
+ActiveRecord::Schema.define(version: 2020_08_01_191549) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -46,13 +46,51 @@ ActiveRecord::Schema.define(version: 2020_08_01_123621) do
     t.index ["post_id"], name: "index_images_on_post_id"
   end
 
-  create_table "posts", force: :cascade do |t|
-    t.string "title"
+  create_table "items", force: :cascade do |t|
+    t.text "title"
     t.text "body"
-    t.integer "user_id"
+    t.integer "price"
+    t.integer "image_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_posts_on_user_id"
+    t.index ["image_id"], name: "index_items_on_image_id"
+    t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.bigint "target_id"
+    t.string "target_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "line_items", force: :cascade do |t|
+    t.integer "item_id", null: false
+    t.integer "order_id", null: false
+    t.integer "quantity"
+    t.integer "amount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_line_items_on_item_id"
+    t.index ["order_id"], name: "index_line_items_on_order_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "status"
+    t.integer "amount"
+    t.string "address1"
+    t.string "address2"
+    t.string "phone"
+    t.integer "zipcode"
+    t.string "name"
+    t.datetime "completed_at"
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -71,6 +109,10 @@ ActiveRecord::Schema.define(version: 2020_08_01_123621) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "images", "posts"
-  add_foreign_key "posts", "users"
+  add_foreign_key "items", "images"
+  add_foreign_key "items", "users"
+  add_foreign_key "likes", "users"
+  add_foreign_key "line_items", "items"
+  add_foreign_key "line_items", "orders"
+  add_foreign_key "orders", "users"
 end
