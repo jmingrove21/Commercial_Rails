@@ -6,5 +6,9 @@ Rails.application.routes.draw do
   # registration, session cotroller 관리
  
   root "home#index"
-  resources :items
+  resources :items do
+    collection do
+      get :list
+    end
+  end
 end

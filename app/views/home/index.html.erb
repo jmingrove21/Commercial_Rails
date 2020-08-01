@@ -32,9 +32,12 @@
 
   <title>Rails Shop</title>
 
+ 
   <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
+  <link href="css/shop-homepage.css" rel="stylesheet">
 
 </head>
 
@@ -76,7 +79,7 @@
 
                   <div class="card-body">
                     <h4 class="card-title">
-                      <a href="#"><%=item.title%></a>
+                      <%= link_to item.title, item_path(item.id)%>
                     </h4>
                     <h5><%=item.price%>원</h5>
                     <p class="card-text"><%=item.body%></p>
