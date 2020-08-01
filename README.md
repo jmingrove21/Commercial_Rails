@@ -18,3 +18,6 @@
 * ActionAdmin을 이용한 관리자 계정 생성
 * User model 개인정보, 사진 추가
 * 회원가입 화면 수정
+
+
+* ImageUploder 추가 및 User와 연결

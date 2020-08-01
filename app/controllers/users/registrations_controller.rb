@@ -4,16 +4,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email,:nickname, :password, :password_confirmation, :address, :zipcode, :image, :image_cache])
+  end
   # GET /resource/sign_up
   # def new
   #   super
   # end
 
   # POST /resource
-  def create
-    @user=User.create regist_params
-    redirect_to root_path
-  end
+  # def create
+  #   super
+  # end
 
   # GET /resource/edit
   # def edit
@@ -61,8 +67,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 
-  private
-  def regist_params
-    params.require(:user).permit(:email,:nickname, :password, :password_confirmation, :address, :zipcode)
-  end
+  
 end
