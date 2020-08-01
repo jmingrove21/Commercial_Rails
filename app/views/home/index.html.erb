@@ -33,7 +33,6 @@
   <title>Rails Shop</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
 
@@ -56,26 +55,28 @@
 
         <div class="row">
           <!-- 등록된 상품이 없는 경우 고려할 필요 있음. 반복문으로 진행/.row -->
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="<%="/image/main.jpg"%>" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Item One</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+          <% if @items.present?%>
+            <% @items.each do |item|%>
+              <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                  <a href="#"><img class="card-img-top" src="<%="/image/main.jpg"%>" alt=""></a>
+                  <div class="card-body">
+                    <h4 class="card-title">
+                      <a href="#"><%=item.title%></a>
+                    </h4>
+                    <h5><%=item.price%>원</h5>
+                    <p class="card-text"><%=item.body%></p>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-muted">판매자 : <%=item.user.nickname%></small>
+                  </div>
+                </div>
               </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
-
-          
-
-        </div>
+            <% end%>
+          <% else%>
+            상품 준비중입니다.
+          <% end%>
+         </div>
         <!-- /.row -->
 
       </div>
@@ -95,10 +96,7 @@
     <!-- /.container -->
   </footer>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+ 
 </body>
 
 </html>
