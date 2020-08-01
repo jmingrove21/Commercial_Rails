@@ -50,5 +50,11 @@ group :test do
   gem 'webdrivers'
 end
 
+# devise 연동
+gem 'devise'
+
+# activeadmin 연동
+gem 'activeadmin'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
