@@ -4,5 +4,11 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users, controllers: {sessions: 'users/sessions', registrations: 'users/registrations'}
   # registration, session cotroller 관리
-
+ 
+  root "home#index"
+  resources :items do
+    collection do
+      get :list
+    end
+  end
 end

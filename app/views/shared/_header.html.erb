@@ -1,0 +1,38 @@
+ <style>
+  .nav-font{
+    font-weight:500;
+  }
+ </style>
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top nav-font"> 
+    <div class="container">
+      <a class="navbar-brand" href="/">RAILS SHOP</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <%if current_user.present?%>
+            <li class="nav-item">
+              <%= link_to "장바구니", new_item_path, class:"nav-link "%>
+            </li>
+            <li class="nav-item">
+              <%= link_to "내 주문", new_item_path, class:"nav-link "%>
+            </li>
+            <li class="nav-item">
+              <%= link_to "내 상품", list_items_path(id: current_user.id), class:"nav-link "%>
+            </li>
+            <li class="nav-item">
+              <%= link_to "상품 등록", new_item_path, class:"nav-link "%>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-link nav-font" %>
+            </li>
+          <%else%>
+            <li class="nav-item">
+              <%= link_to "Log in", new_user_session_path, class: "nav-link nav-font" %>
+            </li>
+          <%end%>
+        </ul>
+      </div>
+    </div>
+  </nav>

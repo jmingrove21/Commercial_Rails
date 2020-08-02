@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    .hero-image {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("<%="/image/main.jpg"%>");
+        height: 400px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+    }
+    .hero-text {
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-weight:500;
+
+        color: white;
+    }
+    .hero-detail{
+        font-weight:500;
+    }
+</style>
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Rails Shop</title>
+
+ 
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/shop-homepage.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <!-- Page Content -->
+  <div class="container" style="padding-top:56px;">
+
+    <div class="row">
+      <!-- /.col-lg-3 -->
+      <div class="col-lg-12">
+        <div class="hero-image my-4">
+            <div class="hero-text">
+                <h1 class="text-white">안녕하세요 <%= current_user ? current_user.nickname : "" %><br> <p style="font-size:50px">&#129321;</p> </h1>
+                <br>
+                <p class="mb-5 hero-detail">Rails 기반 전자상거래 서비스입니다.</p>                   
+            </div>
+        </div>
+
+        <div class="row">
+          <!-- 등록된 상품이 없는 경우 고려. 반복문으로 진행/.row -->
+          <% if @items.present?%>
+            <% @items.each do |item|%>
+              <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                  <div id="carouselExampleIndicators<%=item.id%>" class="carousel slide" data-touch="true">
+                    <ol class="carousel-indicators">
+                        <% item.images.count.times.each do |index| %>
+                            <li data-target="#carouselExampleIndicators<%=item.id%>" data-slide-to="<%= index %>" class="<%= 'active' if (index == 0) %>"></li>
+                        <% end %>
+                    </ol>
+                    <div class="carousel-inner">
+                        <% item.images.each_with_index do |image, index| %>
+                            <div class="carousel-item img-div <%= 'active' if (index == 0) %>">
+                                <img src="<%= image.image %>" class="d-block w-100 img-inner" alt="">
+                            </div>
+                        <% end %>
+                    </div>
+                  </div>
+
+                  <div class="card-body">
+                    <h4 class="card-title">
+                      <%= link_to item.title, item_path(item.id)%>
+                    </h4>
+                    <h5><%=item.price%>원</h5>
+                    <p class="card-text"><%=item.body%></p>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-muted">판매자 : <%=item.user.nickname%></small>
+                  </div>
+                </div>
+              </div>
+            <% end%>
+          <% else%>
+            상품 준비중입니다.
+          <% end%>
+         </div>
+        <!-- /.row -->
+
+      </div>
+      <!-- /.col-lg-9 -->
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; jmingrove21 2020</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+<!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+ 
+</body>
+
+</html>
