@@ -61,8 +61,7 @@
            
             
             <%if @item.user.id==current_user.id%>
-            <a href="#" class="btn btn-outline-danger">제품 삭제하기</a>
-
+                <%=link_to "제품 삭제하기", item_path(id: @item.id), method: :delete, class:"btn btn-outline-danger"%>
             <%else%>
             <a href="#" class="btn btn-outline-success">구매하기</a>
             <a href="#" class="btn btn-outline-danger">찜하기</a>

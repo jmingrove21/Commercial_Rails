@@ -1,16 +1,18 @@
 class ItemsController < ApplicationController
     def index
         @items=Item.all
-        
     end
     def create
         # post=Post.create params.require(:post).permit(:title,:body,:author)
         item=Item.create item_params 
         redirect_to root_path
-     end
+    end
     def update
     end
+
     def destroy
+        @item.destroy
+        redirect_to root_path
     end
     def new
         @item =Item.new
@@ -25,7 +27,7 @@ class ItemsController < ApplicationController
     end
 
     def list
-        @items=Item.find_by(user_id: params[:id])
+        @items=Item.where(user_id: params[:id])
         respond_to do |format|
 			format.html
 			format.js
