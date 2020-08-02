@@ -86,6 +86,25 @@
                   </div>
                   <div class="card-footer">
                     <small class="text-muted">판매자 : <%=item.user.nickname%></small>
+                    <small class="text-muted text-right">
+                      <%time=TimeDifference.between(Time.now,item.created_at).in_general%>
+                      <%if time.values[0] != 0%>
+                        <%=time.values[0]%>년 전
+                      <% elsif time.values[1]!=0%>
+                        <%=time.values[1]%>달 전
+                      <% elsif time.values[2]!=0%>
+                        <%=time.values[2]%>주 전
+                      <% elsif time.values[3]!=0%>
+                        <%=time.values[3]%>일 전
+                      <% elsif time.values[4]!=0%>
+                        <%=time.values[4]%>시간 전
+                      <% elsif time.values[5]!=0%>
+                        <%=time.values[5]%>분 전
+                      <% else %>
+                        <%=time.values[6]%>초 전
+                      <% end %>
+                    </small>
+
                   </div>
                 </div>
               </div>

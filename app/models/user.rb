@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   
   has_many :items, dependent: :nullify
-
+  has_many :orders, dependent: :nullify
 
   mount_uploader :image, ImageUploader
 end

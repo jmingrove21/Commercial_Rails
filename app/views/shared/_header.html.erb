@@ -13,7 +13,7 @@
         <ul class="navbar-nav ml-auto">
           <%if current_user.present?%>
             <li class="nav-item">
-              <%= link_to "장바구니", new_item_path, class:"nav-link "%>
+              <%= link_to "장바구니", cart_index_path, class:"nav-link "%>
             </li>
             <li class="nav-item">
               <%= link_to "내 주문", new_item_path, class:"nav-link "%>
