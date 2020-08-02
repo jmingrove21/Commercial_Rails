@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_01_204218) do
+ActiveRecord::Schema.define(version: 2020_08_02_063802) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -40,9 +40,9 @@ ActiveRecord::Schema.define(version: 2020_08_01_204218) do
 
   create_table "images", force: :cascade do |t|
     t.string "image"
+    t.integer "item_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "item_id", null: false
     t.index ["item_id"], name: "index_images_on_item_id"
   end
 
@@ -58,10 +58,12 @@ ActiveRecord::Schema.define(version: 2020_08_01_204218) do
 
   create_table "likes", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.bigint "target_id"
+    t.integer "target_id"
     t.string "target_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "item_id"
+    t.index ["item_id"], name: "index_likes_on_item_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
@@ -109,6 +111,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_204218) do
 
   add_foreign_key "images", "items"
   add_foreign_key "items", "users"
+  add_foreign_key "likes", "items"
   add_foreign_key "likes", "users"
   add_foreign_key "line_items", "items"
   add_foreign_key "line_items", "orders"
