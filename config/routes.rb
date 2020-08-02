@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :items do
     collection do
       get :list
+      get :makeline
     end
   end
   resources :order
