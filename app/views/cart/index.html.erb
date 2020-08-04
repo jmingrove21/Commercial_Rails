@@ -48,12 +48,31 @@
   .pagination {
       margin-top: 20px;
   }
-  footer {
-      background: #343a40;
-      padding: 40px;
+  .count-button{
+    margin:0px 10px 0px 10px;
+    padding: 0px 0px 0px 0px;
+    width: 30px;
+    background: inherit;
+    border: blue;  
+
   }
-  footer a {
-      color: #f8f9fa!important
+  button:not(.disabled):hover{
+    background-image: none;
+
+    background-color: #c3d9ff;
+    border: blue;  
+    }
+  .count-field{
+    width: 70px;
+    text-align:center;
+  }
+  .table-row{
+    display:flex;
+    vertical-align:middle;
+    justify-content:center;
+  }.table-row-name{
+    vertical-align: middle !important;
+    text-align: center;
   }
 </style>
 <body>
@@ -67,8 +86,8 @@
                   <table class="table table-striped">
                     <thead>
                       <tr>
-                        <th scope="col"> </th>
-                        <th scope="col">상품명</th>
+                        <th scope="col" class="table-row-name"> </th>
+                        <th scope="col" class="table-row-name">상품명</th>
                         <th></th>
                         <th scope="col" class="text-center">수량</th>
                         <th scope="col" class="text-right">가격</th>
@@ -81,12 +100,38 @@
                       <%else%>
                         <% @cart.line_items.each do |c|%>
                           <tr>
-                            <td><img src="<%=c.item.images[0].image%>" style="width:50px;" /> </td>
-                            <td><%=c.item.title%></td>
+                            <td class="table-row-name"><img src="<%=c.item.images[0].image%>" style="width:50px;" /> </td>
+                            <td class="table-row-name" ><%=c.item.title%></td>
                             <td></td>
-                            <td><button>+</button><input class="form-control" type="text" value="1" /><button>+</button></td>
-                            <td class="text-right"><%=c.amount%>원</td>
-                            <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                            <td class="table-row">
+                              <button  type="button" id="minus<%=c.id%>" class="btn-outline-dark count-button">-</button>
+                              <input class="form-control count-field" id="value<%=c.id%>" type="text" value="1" />
+                              <button type="button" class="btn-outline-dark count-button" id="plus<%=c.id%>">+</button>
+                              <script>
+                              $("#minus<%=c.id%>").click(function () {
+                                var p=parseInt($("#value<%=c.id%>").get(0).value);
+                                if(p<=1)
+                                  return;
+                                p=p-1;
+                                $("#value<%=c.id%>").get(0).value=p;
+
+                               
+                                 var v= <%=c.amount%>*p;
+                                $("#price<%=c.id%>").get(0).innerHTML=v+"원";
+                              });
+                              $("#plus<%=c.id%>").click(function () {
+                                var p=parseInt($("#value<%=c.id%>").get(0).value);
+                                p=p+1;
+                                $("#value<%=c.id%>").get(0).value=p;
+
+                                
+                                var v= <%=c.amount%>*p;
+                                $("#price<%=c.id%>").get(0).innerHTML=v+"원";
+                              });
+                              </script>
+                            </td>
+                            <td class="text-right table-row-name" id="price<%=c.id%>"><%=c.amount%>원</td>
+                            <td class="text-right table-row-name"><button class="btn-outline-dark count-button btn-danger"><i class="fa fa-trash"></i> </button> </td>
                           </tr>
                         <%end%>
                       <%end%>
@@ -118,4 +163,4 @@
   </div>
 </body>
 
-  
+ 
