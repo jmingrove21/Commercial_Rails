@@ -1,26 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>Rails Shop</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
-  <link href="css_show/shop-item.css" rel="stylesheet">
-
-</head>
-
 <body>
-
-
   <!-- Page Content -->
   <div class="container" style="padding-top:56px;">
 
@@ -32,25 +10,25 @@
       <div class="col-lg-12">
 
         <div class="card mt-4">
-            <div id="carouselExampleIndicators<%=@item.id%>" class="carousel slide" data-touch="true">
-                <ol class="carousel-indicators">
-                    <% @item.images.count.times.each do |index| %>
-                        <li data-target="#carouselExampleIndicators<%=@item.id%>" data-slide-to="<%= index %>" class="<%= 'active' if (index == 0) %>"></li>
-                    <% end %>
-                </ol>
-                <div class="carousel-inner">
-                    <% @item.images.each_with_index do |image, index| %>
-                        <div class="carousel-item img-div <%= 'active' if (index == 0) %>">
-                            <img src="<%= image.image %>" class="d-block w-100 img-inner" alt="">
-                        </div>
-                    <% end %>
-                </div>
+          <div id="carouselExampleIndicators<%=@item.id%>" class="carousel slide" data-touch="true">
+            <ol class="carousel-indicators">
+              <% @item.images.count.times.each do |index| %>
+                  <li data-target="#carouselExampleIndicators<%=@item.id%>" data-slide-to="<%= index %>" class="<%= 'active' if (index == 0) %>"></li>
+              <% end %>
+            </ol>
+            <div class="carousel-inner">
+              <% @item.images.each_with_index do |image, index| %>
+                  <div class="carousel-item img-div <%= 'active' if (index == 0) %>">
+                    <img src="<%= image.image %>" class="d-block w-100 img-inner" alt="">
+                  </div>
+              <% end %>
             </div>
-            <div class="card-body">
-                <h3 class="card-title"><%=@item.title%></h3>
-                <h4><%=@item.price%>원</h4>
-                <p class="card-text"><%=@item.body%></p>
-                <small class="text-muted">판매자 : <%=@item.user.nickname%></small>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title"><%=@item.title%></h3>
+            <h4><%=@item.price%>원</h4>
+            <p class="card-text"><%=@item.body%></p>
+            <small class="text-muted">판매자 : <%=@item.user.nickname%></small>
           </div>
         </div>
         <!-- /.card -->
@@ -58,37 +36,27 @@
         <div class="card card-outline-secondary text-right my-4">
          
           <div class="card-body">
-           
-            
-            <%if @item.user.id==current_user.id%>
+            <%if current_user.present?%>
+              <%if @item.user.id==current_user.id%>
                 <%=link_to "제품 삭제하기", item_path(@item), method: :delete, class:"btn btn-outline-danger"%>
+              <%else%>
+                <%=link_to "장바구니에 추가", makeline_items_path(id: @item.id),  class:"btn btn-outline-success"%>
+                <a href="#" class="btn btn-outline-danger">찜</a>
+              <%end%>
+                
             <%else%>
-              <%=link_to "장바구니에 추가", makeline_items_path(id: @item.id),  class:"btn btn-outline-success"%>
-              <a href="#" class="btn btn-outline-danger">찜</a>
+              <%=link_to "장바구니에 추가",  new_user_session_path ,  class:"btn btn-outline-success"%>
+              <%=link_to "찜",new_user_session_path, class:"btn btn-outline-danger"%>
             <%end%>
           </div>
         </div>
         <!-- /.card -->
-
       </div>
       <!-- /.col-lg-9 -->
-
     </div>
-
   </div>
   <!-- /.container -->
-
-  <!-- Footer -->
-  <footer class="py-5 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; jmingrove21 2020</p>
-    </div>
-    <!-- /.container -->
-  </footer>
-
   <!-- Bootstrap core JavaScript -->
-  <script src="./vendor_show/jquery/jquery.min.js"></script>
-  <script src="vendor_show/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

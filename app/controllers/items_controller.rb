@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+    before_action :check_user, only: %i(create, list, destroy, update)
     def index
         @items=Item.all
     end
@@ -51,5 +52,9 @@ class ItemsController < ApplicationController
     def line_params
     
     end
+    def check_user
+        redirect_to root_path if !current_user.present?
+    end
+
 
 end

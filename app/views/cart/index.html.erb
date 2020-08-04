@@ -92,92 +92,73 @@ footer a {
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 
-<div class="container" style="padding-top:56px;">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="hero-image my-4">
-        <div class="hero-text">
-            <h1 class="text-white">안녕하세요 <%= current_user ? current_user.nickname : "" %><br> <p style="font-size:50px">&#129302;</p> </h1>
-            <br>
-            <p class="mb-5 hero-detail">Rails 기반 전자상거래 서비스입니다.</p>                   
+<body>
+  <div class="container" style="padding-top:56px;">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="hero-image my-4">
+          <div class="hero-text">
+              <h1 class="text-white">안녕하세요 <%= current_user ? current_user.nickname : "" %><br> <p style="font-size:50px">&#129302;</p> </h1>
+              <br>
+              <p class="mb-5 hero-detail">Rails 기반 전자상거래 서비스입니다.</p>                   
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-12">
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col"> </th>
-                            <th scope="col">상품명</th>
-                            <th></th>
-                            <th scope="col" class="text-center">수량</th>
-                            <th scope="col" class="text-right">가격</th>
-                            <th> </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                      <%if @cart.amount==0%>
-                        카트 비었다.
-                      <%else%>
-                        <% @cart.line_items.each do |c|%>
+        <div class="row">
+          <div class="col-lg-12">
+              <div class="table-responsive">
+                  <table class="table table-striped">
+                      <thead>
                           <tr>
-                              <td><img src="<%=c.item.images[0].image%>" style="width:50px;" /> </td>
-                              <td><%=c.item.title%></td>
-                              <td></td>
-                              <td><button>+</button><input class="form-control" type="text" value="1" /><button>+</button></td>
-                              <td class="text-right"><%=c.amount%>원</td>
-                              <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                              <th scope="col"> </th>
+                              <th scope="col">상품명</th>
+                              <th></th>
+                              <th scope="col" class="text-center">수량</th>
+                              <th scope="col" class="text-right">가격</th>
+                              <th> </th>
                           </tr>
+                      </thead>
+                      <tbody>
+                        <%if @cart.amount==0%>
+                          카트 비었다.
+                        <%else%>
+                          <% @cart.line_items.each do |c|%>
+                            <tr>
+                                <td><img src="<%=c.item.images[0].image%>" style="width:50px;" /> </td>
+                                <td><%=c.item.title%></td>
+                                <td></td>
+                                <td><button>+</button><input class="form-control" type="text" value="1" /><button>+</button></td>
+                                <td class="text-right"><%=c.amount%>원</td>
+                                <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                            </tr>
+                          <%end%>
                         <%end%>
-                      <%end%>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="text-right"><strong><%=@cart.amount%>원</strong></td>
-                        <td></td>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td class="text-right"><strong><%=@cart.amount%>원</strong></td>
+                          <td></td>
 
-                      </tr>
-                    </tbody>
-                </table>
-            </div>
+                        </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          <div class="col mb-2">
+              <div class="row">
+                  <div class="col-sm-12  col-md-6">
+                      <button class="btn btn-block btn-light">Continue Shopping</button>
+                  </div>
+                  <div class="col-sm-12 col-md-6 text-right">
+                      <button class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
+                  </div>
+              </div>
+          </div>
         </div>
-        <div class="col mb-2">
-            <div class="row">
-                <div class="col-sm-12  col-md-6">
-                    <button class="btn btn-block btn-light">Continue Shopping</button>
-                </div>
-                <div class="col-sm-12 col-md-6 text-right">
-                    <button class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
-                </div>
-            </div>
-        </div>
-      </div>
-    </div>  
-  </div>
-</div>
-
-<div style="padding-top:56px">
-    <%if @cart.amount==0%>
-    카트 비었다.
-    <%else%>
-        <% @cart.line_items.each do |c|%>
-            <%=c.id%>
-            <%=c.item_id%>
-            <%=c.order_id%>
-            <%=c.quantity%>
-            <%=c.amount%>
-            
-        <%end%>
-    카트 안비었다
-    <%end%>
-</div>
-<!-- Footer -->
-  <footer class="py-5 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; jmingrove21 2020</p>
+      </div>  
     </div>
-    <!-- /.container -->
-  </footer>
+  </div>
+</body>
+
+  
