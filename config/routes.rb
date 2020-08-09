@@ -13,5 +13,10 @@ Rails.application.routes.draw do
     end
   end
   resources :order
-  resources :cart
+  
+  resources :cart do 
+    collection do
+      get :modify
+    end
+  end
 end

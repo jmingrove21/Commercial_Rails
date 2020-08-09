@@ -1,52 +1,52 @@
 <style>
   .bloc_left_price {
-      color: #c01508;
-      text-align: center;
-      font-weight: bold;
-      font-size: 150%;
+    color: #c01508;
+    text-align: center;
+    font-weight: bold;
+    font-size: 150%;
   }
   .category_block li:hover {
-      background-color: #007bff;
+    background-color: #007bff;
   }
   .category_block li:hover a {
-      color: #ffffff;
+    color: #ffffff;
   }
   .category_block li a {
-      color: #343a40;
+    color: #343a40;
   }
   .add_to_cart_block .price {
-      color: #c01508;
-      text-align: center;
-      font-weight: bold;
-      font-size: 200%;
-      margin-bottom: 0;
+    color: #c01508;
+    text-align: center;
+    font-weight: bold;
+    font-size: 200%;
+    margin-bottom: 0;
   }
   .add_to_cart_block .price_discounted {
-      color: #343a40;
-      text-align: center;
-      text-decoration: line-through;
-      font-size: 140%;
+    color: #343a40;
+    text-align: center;
+    text-decoration: line-through;
+    font-size: 140%;
   }
   .product_rassurance {
-      padding: 10px;
-      margin-top: 15px;
-      background: #ffffff;
-      border: 1px solid #6c757d;
-      color: #6c757d;
+    padding: 10px;
+    margin-top: 15px;
+    background: #ffffff;
+    border: 1px solid #6c757d;
+    color: #6c757d;
   }
   .product_rassurance .list-inline {
-      margin-bottom: 0;
-      text-transform: uppercase;
-      text-align: center;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    text-align: center;
   }
   .product_rassurance .list-inline li:hover {
-      color: #343a40;
+    color: #343a40;
   }
   .reviews_product .fa-star {
-      color: gold;
+    color: gold;
   }
   .pagination {
-      margin-top: 20px;
+    margin-top: 20px;
   }
   .count-button{
     margin:0px 10px 0px 10px;
@@ -58,10 +58,9 @@
   }
   button:not(.disabled):hover{
     background-image: none;
-
     background-color: #c3d9ff;
     border: blue;  
-    }
+  }
   .count-field{
     width: 70px;
     text-align:center;
@@ -75,11 +74,12 @@
     text-align: center;
   }
 </style>
+
 <body>
   <div class="container" style="padding-top:56px;">
     <div class="row">
       <div class="col-lg-12">
-        <%=render "shared/main", img: "/image/cart.jpg", message: "Rails 기반 전자상거래 서비스입니다.", emoji: '&#129302;' %>
+        <%=render "shared/main", img: "/image/cart.jpg", message: "장바구니 상태를 보여드립니다.", emoji: '&#129302;' %>
         <div class="row">
           <div class="col-lg-12">
               <div class="table-responsive">
@@ -99,40 +99,7 @@
                         카트 비었다.
                       <%else%>
                         <% @cart.line_items.each do |c|%>
-                          <tr>
-                            <td class="table-row-name"><img src="<%=c.item.images[0].image%>" style="width:50px;" /> </td>
-                            <td class="table-row-name" ><%=c.item.title%></td>
-                            <td></td>
-                            <td class="table-row">
-                              <button  type="button" id="minus<%=c.id%>" class="btn-outline-dark count-button">-</button>
-                              <input class="form-control count-field" id="value<%=c.id%>" type="text" value="1" />
-                              <button type="button" class="btn-outline-dark count-button" id="plus<%=c.id%>">+</button>
-                              <script>
-                              $("#minus<%=c.id%>").click(function () {
-                                var p=parseInt($("#value<%=c.id%>").get(0).value);
-                                if(p<=1)
-                                  return;
-                                p=p-1;
-                                $("#value<%=c.id%>").get(0).value=p;
-
-                               
-                                 var v= <%=c.amount%>*p;
-                                $("#price<%=c.id%>").get(0).innerHTML=v+"원";
-                              });
-                              $("#plus<%=c.id%>").click(function () {
-                                var p=parseInt($("#value<%=c.id%>").get(0).value);
-                                p=p+1;
-                                $("#value<%=c.id%>").get(0).value=p;
-
-                                
-                                var v= <%=c.amount%>*p;
-                                $("#price<%=c.id%>").get(0).innerHTML=v+"원";
-                              });
-                              </script>
-                            </td>
-                            <td class="text-right table-row-name" id="price<%=c.id%>"><%=c.amount%>원</td>
-                            <td class="text-right table-row-name"><button class="btn-outline-dark count-button btn-danger"><i class="fa fa-trash"></i> </button> </td>
-                          </tr>
+                          <%=render "row", cart: c%>
                         <%end%>
                       <%end%>
                       <tr>
@@ -149,11 +116,12 @@
           </div>
           <div class="col mb-2">
             <div class="row">
-              <div class="col-sm-12  col-md-6">
-                  <button class="btn btn-block btn-light">Continue Shopping</button>
+              <div class="col-md-6 text-right"> 
               </div>
-              <div class="col-sm-12 col-md-6 text-right">
-                  <button class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
+              <div class="col-md-6 text-right">
+                <button class="btn btn-outline-dark btn-light">비우기</button>
+
+                <button class="btn btn-outline-dark ">결제하기</button>
               </div>
             </div>
           </div>

@@ -8,7 +8,7 @@ class CartController < ApplicationController
     end
 
     def update
-    
+        
     end
     
     def destroy
@@ -26,4 +26,12 @@ class CartController < ApplicationController
     def show
     
     end
+
+    def modify
+        @cart=LineItem.find_by(id: params[:id])
+        respond_to do |format|
+			format.js
+		end
+    end
+
 end
