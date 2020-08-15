@@ -12,10 +12,8 @@ $("#minus<%=@cart.id%>").on("ajax:success", function(){
 $("#plus<%=@cart.id%>").off("ajax:success")
 $("#plus<%=@cart.id%>").on("ajax:success",function(){
     var p=parseInt($("#value<%=@cart.id%>").get(0).value);
-    alert(p)
     p=p+1;
     $("#value<%=@cart.id%>").get(0).value=p;
-
     
     var v= <%=@cart.amount%>*p;
     $("#price<%=@cart.id%>").get(0).innerHTML=v+"원";

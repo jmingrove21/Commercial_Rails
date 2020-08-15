@@ -19,4 +19,6 @@ Rails.application.routes.draw do
       get :modify
     end
   end
+
+  resources :order
 end
