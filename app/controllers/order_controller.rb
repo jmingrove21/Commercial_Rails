@@ -13,13 +13,14 @@ class OrderController < ApplicationController
     end
 
     def new
-        @order=Order.where(user_id: current_user).where(status:0).first
+        @order=current_user.orders.where(status:0).first
         @order.update amount: @order.line_items.sum(:amount)
     end
 
     def update
         order=Order.find_by(id: params[:id])
-        order.update name: params.require(:order)[:name], phone: params.require(:order)[:phone], address1: params.require(:order)[:address1], completed_at: params.require(:order)[:completed_at], zipcode: params.require(:order)[:zip], status: 1
+        params[:order][:status] = 1
+        order.update update_params
         redirect_to root_path
     end
 
@@ -29,6 +30,11 @@ class OrderController < ApplicationController
 
     def destroy
     
+    end
+
+    private
+    def update_params
+        params.require(:order).permit(:name, :phone, :address1, :completed_at, :zipcode, :status)
     end
 
 end
