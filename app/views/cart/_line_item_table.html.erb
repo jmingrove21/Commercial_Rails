@@ -13,7 +13,7 @@
         </thead>
         <tbody>
             <% cart.line_items.each do |c|%>
-                <%=render "row", cart: c %>
+                <%=render "row", lineitem: c %>
             <%end%>
             <tr>
             <td></td>

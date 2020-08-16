@@ -7,14 +7,14 @@
 </style>
 
 <tr>
-  <td class="table-row-name"><img src="<%=cart.item.images[0].image%>" style="width:50px;" /> </td>
-  <td class="table-row-name" ><%=cart.item.title%></td>
+  <td class="table-row-name"><img src="<%=lineitem.item.images[0].image%>" style="width:50px;" /> </td>
+  <td class="table-row-name" ><%=lineitem.item.title%></td>
   <td></td>
   <td class="table-row">
-    <%=link_to '-', modify_cart_index_path(id: cart.id, type: "minus"), id: "minus"+cart.id.to_s, notice: "msg", class: "btn-outline-dark count-button button_text", remote: true%>
-    <input class="form-control count-field" id="value<%=cart.id%>" type="text" value="<%=cart.quantity%>" />
-    <%=link_to '+', modify_cart_index_path(id: cart.id, type: "plus"), id: "plus"+cart.id.to_s,class: "btn-outline-dark count-button button_text", remote: true%>
+    <%=link_to '-', modify_cart_index_path(id: lineitem.id, type: "minus"), id: "minus"+lineitem.id.to_s, notice: "msg", class: "btn-outline-dark count-button button_text", remote: true%>
+    <input class="form-control count-field" id="value<%=lineitem.id%>" type="text" value="<%=lineitem.quantity%>" />
+    <%=link_to '+', modify_cart_index_path(id: lineitem.id, type: "plus"), id: "plus"+lineitem.id.to_s,class: "btn-outline-dark count-button button_text", remote: true%>
   </td>
-  <td class="text-right table-row-name" id="price<%=cart.id%>"><%=cart.amount%>원</td>
+  <td class="text-right table-row-name" id="price<%=lineitem.id%>"><%=lineitem.amount%>원</td>
   <td class="text-right table-row-name"><button class="btn-outline-dark count-button btn-danger"><i class="fa fa-trash"></i> </button> </td>
 </tr>
