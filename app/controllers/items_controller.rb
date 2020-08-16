@@ -4,7 +4,6 @@ class ItemsController < ApplicationController
         @items=Item.all
     end
     def create
-        # post=Post.create params.require(:post).permit(:title,:body,:author)
         item=Item.create item_params 
         redirect_to root_path
     end
@@ -37,10 +36,25 @@ class ItemsController < ApplicationController
     end
 
     def makeline
+
+        byebug
         item=Item.find_by(id:params[:id])
-        lineitem=LineItem.create(item_id: item.id, quantity: 1, order_id: current_user.orders.find_by(status: 0).id, amount: item.price)
         cart = current_user.orders.find_by(status: 0)
-        cart.update amount: cart.amount + lineitem.amount
+
+        byebug
+
+        if LineItem.where(item_id: item.id).where(order_id:cart.id).present?
+            lineitem=LineItem.where(item_id: item.id).where(order_id:cart.id).first
+            lineitem.update quantity: lineitem.quantity+1 , amount: lineitem.amount+item.price
+        else
+            lineitem=LineItem.create(item_id: item.id, quantity: 1, order_id: current_user.orders.find_by(status: 0).id, amount: item.price)
+        end
+        cart.update amount: 0
+
+        for LineItem.where(order_id: cart.id).each do |l|
+            cart.update amount: cart.amount + l.amount
+        end
+
         redirect_to root_path
     end
 
