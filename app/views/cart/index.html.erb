@@ -96,7 +96,6 @@
                     </thead>
                     <tbody>
                       <%if @cart.amount==0%>
-                        카트 비었다.
                       <%else%>
                         <% @cart.line_items.each do |c|%>
                           <%=render "row", cart: c%>
