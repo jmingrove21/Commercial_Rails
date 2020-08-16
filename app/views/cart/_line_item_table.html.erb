@@ -1,0 +1,28 @@
+<% cart ||= nil %>
+<% if cart %>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+            <th scope="col" class="table-row-name"> </th>
+            <th scope="col" class="table-row-name">상품명</th>
+            <th></th>
+            <th scope="col" class="text-center">수량</th>
+            <th scope="col" class="text-right">가격</th>
+            <th> </th>
+            </tr>
+        </thead>
+        <tbody>
+            <% cart.line_items.each do |c|%>
+                <%=render "row", cart: c %>
+            <%end%>
+            <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="text-right"><strong><%=cart.line_items.sum(:amount)%>원</strong></td>
+            <td></td>
+            </tr>
+        </tbody>
+    </table>
+<% end %>

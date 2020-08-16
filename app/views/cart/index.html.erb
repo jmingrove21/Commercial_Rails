@@ -82,35 +82,8 @@
         <%=render "shared/main", img: "/image/cart.jpg", message: "장바구니 상태를 보여드립니다.", emoji: '&#129302;' %>
         <div class="row">
           <div class="col-lg-12">
-              <div class="table-responsive">
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th scope="col" class="table-row-name"> </th>
-                        <th scope="col" class="table-row-name">상품명</th>
-                        <th></th>
-                        <th scope="col" class="text-center">수량</th>
-                        <th scope="col" class="text-right">가격</th>
-                        <th> </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <%if @cart.amount==0%>
-                      <%else%>
-                        <% @cart.line_items.each do |c|%>
-                          <%=render "row", cart: c%>
-                        <%end%>
-                      <%end%>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="text-right"><strong><%=@cart.amount%>원</strong></td>
-                        <td></td>
-                      </tr>
-                    </tbody>
-                  </table>
+              <div class="table-responsive" id="line_item_table">
+                  <%= render 'line_item_table', cart: @cart %>
               </div>
           </div>
           <div class="col mb-2">
@@ -118,10 +91,10 @@
               <div class="col-md-6 text-right"> 
               </div>
               <div class="col-md-6 text-right">
-                <% if @cart.amount!=0%>
+            <%# <% if @cart.amount!=0%> 
                   <button class="btn btn-outline-dark btn-light">비우기</button>
                   <%= link_to "주문하기", new_order_path(), class: "btn btn-outline-dark " %>
-                <%end%>
+                <%# <%end%>
               </div>
             </div>
           </div>

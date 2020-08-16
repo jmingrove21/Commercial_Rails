@@ -36,24 +36,21 @@ class ItemsController < ApplicationController
     end
 
     def makeline
-
-        byebug
-        item=Item.find_by(id:params[:id])
+        item = Item.find_by(id:params[:id])
         cart = current_user.orders.find_by(status: 0)
 
-        byebug
-
         if LineItem.where(item_id: item.id).where(order_id:cart.id).present?
-            lineitem=LineItem.where(item_id: item.id).where(order_id:cart.id).first
-            lineitem.update quantity: lineitem.quantity+1 , amount: lineitem.amount+item.price
+            lineitem = LineItem.where(item_id: item.id).where(order_id: cart.id).first
+            
+            lineitem.update(quantity: (lineitem.quantity + 1), amount: (lineitem.amount + item.price))
         else
             lineitem=LineItem.create(item_id: item.id, quantity: 1, order_id: current_user.orders.find_by(status: 0).id, amount: item.price)
         end
         cart.update amount: 0
 
-        for LineItem.where(order_id: cart.id).each do |l|
-            cart.update amount: cart.amount + l.amount
-        end
+        # for LineItem.where(order_id: cart.id).each do |l|
+        #     cart.update amount: cart.amount + l.amount
+        # end
 
         redirect_to root_path
     end

@@ -28,7 +28,10 @@ class CartController < ApplicationController
     end
 
     def modify
-        @cart=LineItem.find_by(id: params[:id])
+        @line_item=LineItem.find_by(id: params[:id])
+        target_num = (params[:type] == "plus") ? 1 : -1
+        @line_item.update quantity: @line_item.quantity + target_num
+
         respond_to do |format|
 			format.js
 		end
