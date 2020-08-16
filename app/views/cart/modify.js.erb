@@ -1,0 +1,21 @@
+
+$("#minus<%=@cart.id%>").off("ajax:success");
+$("#minus<%=@cart.id%>").on("ajax:success", function(){
+    var p=parseInt($("#value<%=@cart.id%>").get(0).value);
+    if(p<=1)
+        return;
+    p=p-1;
+    $("#value<%=@cart.id%>").get(0).value=p;
+    var v= <%=@cart.amount%>*p;
+    $("#price<%=@cart.id%>").get(0).innerHTML=v+"원";
+});
+$("#plus<%=@cart.id%>").off("ajax:success")
+$("#plus<%=@cart.id%>").on("ajax:success",function(){
+    var p=parseInt($("#value<%=@cart.id%>").get(0).value);
+    p=p+1;
+    $("#value<%=@cart.id%>").get(0).value=p;
+    
+    var v= <%=@cart.amount%>*p;
+    $("#price<%=@cart.id%>").get(0).innerHTML=v+"원";
+
+})

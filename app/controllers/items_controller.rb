@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+    before_action :check_user, only: %i(create, list, destroy, update)
     def index
         @items=Item.all
     end
@@ -35,9 +36,25 @@ class ItemsController < ApplicationController
 		end
     end
 
+    def makeline
+        item=Item.find_by(id:params[:id])
+        lineitem=LineItem.create(item_id: item.id, quantity: 1, order_id: current_user.orders.find_by(status: 0).id, amount: item.price)
+        cart = current_user.orders.find_by(status: 0)
+        cart.update amount: cart.amount + lineitem.amount
+        redirect_to root_path
+    end
 
     private
     def item_params
         params.require(:item).permit(:title, :body, :price, :user_id, images_attributes: [:image])
     end
+
+    def line_params
+    
+    end
+    def check_user
+        redirect_to root_path if !current_user.present?
+    end
+
+
 end

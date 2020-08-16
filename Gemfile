@@ -60,5 +60,9 @@ gem 'devise'
 # activeadmin 연동
 gem 'activeadmin'
 
+# tie_difference 연동
+gem 'time_difference'
+
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
