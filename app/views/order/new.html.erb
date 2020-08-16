@@ -64,7 +64,7 @@
     </div>
     <div class="col-md-8 order-md-1">
       <h4 class="mb-3">받으시는 분</h4>
-      <%=render "form", order: Order.first%>
+      <%=render "form", order: current_user.orders.find_by(status: 0)%>
     </div>
   </div>
 

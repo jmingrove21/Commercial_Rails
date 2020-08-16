@@ -1,79 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-<body>
-  <!-- Page Content -->
-  <div class="container" style="padding-top:56px;">
-    <div class="row">
-      <!-- /.col-lg-3 -->
-      <div class="col-lg-12">
-        <%=render "shared/main", img: "/image/main.jpg", message: "Rails 기반 전자상거래 서비스입니다.", emoji: '&#129321;'%>
-        <div class="row">
-          <!-- 등록된 상품이 없는 경우 고려. 반복문으로 진행/.row -->
-          <% if @items.present?%>
-            <% @items.each do |item|%>
-              <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card h-100">
-                  <div id="carouselExampleIndicators<%=item.id%>" class="carousel slide" data-touch="true">
-                    <ol class="carousel-indicators">
-                        <% item.images.count.times.each do |index| %>
-                            <li data-target="#carouselExampleIndicators<%=item.id%>" data-slide-to="<%= index %>" class="<%= 'active' if (index == 0) %>"></li>
-                        <% end %>
-                    </ol>
-                    <div class="carousel-inner">
-                        <% item.images.each_with_index do |image, index| %>
-                            <div class="carousel-item img-div <%= 'active' if (index == 0) %>">
-                                <img src="<%= image.image %>" class="d-block w-100 img-inner" alt="">
-                            </div>
-                        <% end %>
-                    </div>
-                  </div>
-
-                  <div class="card-body">
-                    <h4 class="card-title">
-                      <%= link_to item.title, item_path(item.id)%>
-                    </h4>
-                    <h5><%=item.price%>원</h5>
-                    <p class="card-text"><%=item.body%></p>
-                  </div>
-                  <div class="card-footer">
-                    <small class="text-muted">판매자 : <%=item.user.nickname%></small>
-                    <small class="text-muted text-right">
-                      <%time=TimeDifference.between(Time.now,item.created_at).in_general%>
-                      <%if time.values[0] != 0%>
-                        <%=time.values[0]%>년 전
-                      <% elsif time.values[1]!=0%>
-                        <%=time.values[1]%>달 전
-                      <% elsif time.values[2]!=0%>
-                        <%=time.values[2]%>주 전
-                      <% elsif time.values[3]!=0%>
-                        <%=time.values[3]%>일 전
-                      <% elsif time.values[4]!=0%>
-                        <%=time.values[4]%>시간 전
-                      <% elsif time.values[5]!=0%>
-                        <%=time.values[5]%>분 전
-                      <% else %>
-                        <%=time.values[6]%>초 전
+<!-- Page Content -->
+<div class="container" style="padding-top:56px;">
+  <div class="row">
+    <!-- /.col-lg-3 -->
+    <div class="col-lg-12">
+      <%=render "shared/main", img: "/image/main.jpg", message: "Rails 기반 전자상거래 서비스입니다.", emoji: '&#129321;'%>
+      <div class="row">
+        <!-- 등록된 상품이 없는 경우 고려. 반복문으로 진행/.row -->
+        <% if @items.present?%>
+          <% @items.each do |item|%>
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <div id="carouselExampleIndicators<%=item.id%>" class="carousel slide" data-touch="true">
+                  <ol class="carousel-indicators">
+                      <% item.images.count.times.each do |index| %>
+                          <li data-target="#carouselExampleIndicators<%=item.id%>" data-slide-to="<%= index %>" class="<%= 'active' if (index == 0) %>"></li>
                       <% end %>
-                    </small>
-
+                  </ol>
+                  <div class="carousel-inner">
+                      <% item.images.each_with_index do |image, index| %>
+                          <div class="carousel-item img-div <%= 'active' if (index == 0) %>">
+                              <img src="<%= image.image %>" class="d-block w-100 img-inner" alt="">
+                          </div>
+                      <% end %>
                   </div>
                 </div>
-              </div>
-            <% end%>
-          <% else%>
-            상품 준비중입니다.
-          <% end%>
-         </div>
-        <!-- /.row -->
 
-      </div>
-      <!-- /.col-lg-9 -->
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <%= link_to item.title, item_path(item.id)%>
+                  </h4>
+                  <h5><%=item.price%>원</h5>
+                  <p class="card-text"><%=item.body%></p>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">판매자 : <%=item.user.nickname%></small>
+                  <small class="text-muted text-right">
+                    <%time=TimeDifference.between(Time.now,item.created_at).in_general%>
+                    <%if time.values[0] != 0%>
+                      <%=time.values[0]%>년 전
+                    <% elsif time.values[1]!=0%>
+                      <%=time.values[1]%>달 전
+                    <% elsif time.values[2]!=0%>
+                      <%=time.values[2]%>주 전
+                    <% elsif time.values[3]!=0%>
+                      <%=time.values[3]%>일 전
+                    <% elsif time.values[4]!=0%>
+                      <%=time.values[4]%>시간 전
+                    <% elsif time.values[5]!=0%>
+                      <%=time.values[5]%>분 전
+                    <% else %>
+                      <%=time.values[6]%>초 전
+                    <% end %>
+                  </small>
+
+                </div>
+              </div>
+            </div>
+          <% end%>
+        <% else%>
+          상품 준비중입니다.
+        <% end%>
+        </div>
+      <!-- /.row -->
 
     </div>
-    <!-- /.row -->
+    <!-- /.col-lg-9 -->
 
   </div>
-  <!-- /.container -->
-</body>
+  <!-- /.row -->
 
-</html>
+</div>

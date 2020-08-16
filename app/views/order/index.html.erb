@@ -1,0 +1,124 @@
+<style>
+  .bloc_left_price {
+    color: #c01508;
+    text-align: center;
+    font-weight: bold;
+    font-size: 150%;
+  }
+  .category_block li:hover {
+    background-color: #007bff;
+  }
+  .category_block li:hover a {
+    color: #ffffff;
+  }
+  .category_block li a {
+    color: #343a40;
+  }
+  .add_to_cart_block .price {
+    color: #c01508;
+    text-align: center;
+    font-weight: bold;
+    font-size: 200%;
+    margin-bottom: 0;
+  }
+  .add_to_cart_block .price_discounted {
+    color: #343a40;
+    text-align: center;
+    text-decoration: line-through;
+    font-size: 140%;
+  }
+  .product_rassurance {
+    padding: 10px;
+    margin-top: 15px;
+    background: #ffffff;
+    border: 1px solid #6c757d;
+    color: #6c757d;
+  }
+  .product_rassurance .list-inline {
+    margin-bottom: 0;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .product_rassurance .list-inline li:hover {
+    color: #343a40;
+  }
+  .reviews_product .fa-star {
+    color: gold;
+  }
+  .pagination {
+    margin-top: 20px;
+  }
+  .count-button{
+    margin:0px 10px 0px 10px;
+    padding: 0px 0px 0px 0px;
+    width: 30px;
+    background: inherit;
+    border: blue;  
+
+  }
+  button:not(.disabled):hover{
+    background-image: none;
+    background-color: #c3d9ff;
+    border: blue;  
+  }
+  .count-field{
+    width: 70px;
+    text-align:center;
+  }
+  .table-row{
+    display:flex;
+    vertical-align:middle;
+    justify-content:center;
+  }.table-row-name{
+    vertical-align: middle !important;
+    text-align: center;
+  }
+</style>
+
+<div class="container" style="padding-top:56px;">
+  <div class="row">
+    <div class="col-lg-12">
+      <%=render "shared/main", img: "/image/cart.jpg", message: "주문 내역을 보여드립니다.", emoji: '&#129300;' %>
+      <div class="row">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="table-row-name"> </th>
+                      <th scope="col" class="table-row-name">상품명</th>
+                      <th scope="col" class="text-right">가격</th>
+                      <th> </th>
+                      <th scope="col" class="text-center">주문일</th>
+                      <th scope="col" class="text-center">배송상태</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <%if @order.present?%>
+                      <%  @order.each do |o|%>
+                        <%=render "row", order: o%>
+                      <%end%>
+                    
+                    <%end%>
+
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>      
+                      <td></td>
+
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+        </div>
+        
+      </div>
+    </div>  
+  </div>
+</div>
+
+
+ 

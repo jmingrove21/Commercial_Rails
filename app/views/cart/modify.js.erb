@@ -16,6 +16,9 @@ $("#plus<%=@cart.id%>").on("ajax:success",function(){
     $("#value<%=@cart.id%>").get(0).value=p;
     
     var v= <%=@cart.amount%>*p;
+    <%@cart.update quantity: p, amount: v%>
+     
     $("#price<%=@cart.id%>").get(0).innerHTML=v+"원";
+    
 
 })
