@@ -118,9 +118,10 @@
               <div class="col-md-6 text-right"> 
               </div>
               <div class="col-md-6 text-right">
-                <button class="btn btn-outline-dark btn-light">비우기</button>
-
-                <%= link_to "주문하기", new_order_path(), class: "btn btn-outline-dark " %>
+                <% if @cart.amount!=0%>
+                  <button class="btn btn-outline-dark btn-light">비우기</button>
+                  <%= link_to "주문하기", new_order_path(), class: "btn btn-outline-dark " %>
+                <%end%>
               </div>
             </div>
           </div>
