@@ -12,13 +12,25 @@
     <%=f.text_field(:phone, class:"form-control", id:"phone", placeholder:"010-0000-0000", value:"", required: :true)%>
   </div>
   <div class="mb-3">
-    <label for="address">주소 <span class="text-muted"><button>기본 배송지</button></span> </label>
+    <label for="address">주소 <span class="text-muted">
+      <button id="address-setting-btn">기본 배송지</button></span> </label>
     <%=f.text_field(:address1, class:"form-control", id:"address", placeholder:"", value:"", required: :true)%>
   </div>
   <div class="mb-3">
     <label for="zip">Zip</label>
     <%=f.text_field(:zip, class:"form-control", id:"zip", placeholder:"", value:"", required: :true)%>
   </div>
-  
-  <button class="btn btn-primary btn-lg btn-block" type="submit">주문 완료하기</button>
+  <%= f.hidden_field :completed_at, value:Time.now %>
+  <%=f.submit "주문 완료하기"%>
 <%end%>
+<script>
+  $("#address-setting-btn").click(function(){
+    var n="<%=current_user.nickname%>";
+    $("#name").val(n);
+    var a="<%=order.address2%>";
+    $("#address").val(a);
+    var z="<%=order.zipcode%>";
+    $("#zip").val(z);
+    
+  });
+</script>   
